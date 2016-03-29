@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Get Parameter</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script type="text/javascript">	
+	var $_GET = (function() {
+		var url = window.document.location.href.toString();
+		var u = url.split('?');
+		if (u[1] && typeof(u[1]) == 'string') {
+			u = u[1].split('&');
+			var get = {};
+			for (var i in u) {
+				var j = u[i].split('=');
+				get[j[0]] = j[1];
+			}
+			return get;
+		} else {
+			return {};
+		}
+	})();
+
+
+	var html_str = '<h3>get参数列表：</h3>';
+
+	for (var i in $_GET) {
+		html_str += decodeURIComponent(i) + ' = ' + decodeURIComponent($_GET[i]) + '<br>';
+	}
+
+	document.getElementById("container").innerHTML = html_str;
+</script>
+</body>
+</html>
